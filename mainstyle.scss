@@ -1,0 +1,224 @@
+$blue: #A0CED9;
+$pink: #F2A4A4;
+$green: #ADF7B6;
+$yellow: #FFEE93;
+$orange: #FCC271;
+$white: #fff;
+$dark: #444;
+$black: #111;
+$dark-overlay: rgba(#000000, 0.5);
+// Add a serif family
+$family-serif: "Roboto";
+
+// 3. Set the derived variables
+$primary: $blue;
+$primary-low: lighten(desaturate($primary, 5%), 10%);
+$primary-dark: darken($primary, 10%);
+$primary-bg: lighten($primary, 50%);
+
+$primary-invert: $white;
+
+$secondary: $orange;
+$secondary-dark: darken($secondary, 10%);
+
+$shadow-color: transparentize($dark, 0.85);
+$shadow-color-strong: transparentize($dark, 0.5);
+
+$family-primary: $family-serif;
+
+$shadow: 3px 3px 5px $shadow-color;
+$bottom-shadow: 0 5px 5px $shadow-color;
+$outer-shadow: 0 0px 10px $shadow-color;
+
+$shadow-strong: 3px 3px 5px $shadow-color-strong;
+$bottom-shadow-strong: 0 5px 5px $shadow-color-strong;
+$outer-shadow-strong: 0 0px 10px $shadow-color-strong;
+
+$text-shadow: 0 0 0;
+
+*
+{
+  font-family: $family-primary;
+  color: $dark;
+}
+
+html, body, div
+{
+  margin: 0;
+  padding: 0;
+}
+
+.margin-big
+{
+  margin: 4em;
+}
+
+.margin-med
+{
+  margin: 2em;
+}
+
+.margin-small
+{
+  margin: 0.5em;
+}
+
+.vert-margin-big
+{
+  margin-top: 4em;
+  margin-bottom: 4em;
+}
+
+.vert-margin-med
+{
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.vert-margin-small
+{
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.padding-small
+{
+  padding: 0.5em
+}
+
+.two-line-title
+{
+  width: fit-content;
+  margin: 0 auto;
+  & > .title
+  {
+    margin-bottom: 0;
+  }
+  & > .subtitle
+  {
+    margin-top: 0;
+  }
+}
+
+.title
+{
+  font-weight: bolder;
+}
+
+.subtitle
+{
+  font-weight: normal;
+}
+
+.text-no-decor
+{
+  text-decoration: none;
+}
+
+.center-text
+{
+  text-align: center;
+}
+
+.center-content
+{
+  display: flex;
+  justify-content: center;
+}
+
+.circle
+{
+  border-radius: 50%;
+}
+
+.color-primary
+{
+  color: $primary;
+}
+
+.text-shadow
+{
+  text-shadow: $text-shadow;
+}
+
+.nav-bar
+{
+  height: 4em;
+  display: flex;
+  justify-content: stretch;
+  background-color: $primary-low;
+
+  $theTransition: background-color 0.5s, color 0.25s, margin 0.25s;
+  & a
+  {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: auto;
+    height: 100%;
+    background-color: $white;
+    font-size: large;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: $text-shadow;
+    font-weight: bolder;
+    box-shadow: $outer-shadow;
+    -webkit-transition: $theTransition;
+    -moz-transition: $theTransition;
+    -ms-transition: $theTransition;
+    -o-transition: $theTransition;
+    transition: $theTransition;
+
+    &[class*="brand"]
+    {
+      img
+      {
+        height: 75%;
+        object-fit: contain;
+        filter: drop-shadow($text-shadow);
+      }
+    }
+
+    &:hover
+    {
+      background-color: $primary;
+      color: $primary-invert;
+      margin: 0.5em;
+      -webkit-transition: $theTransition;
+      -moz-transition: $theTransition;
+      -ms-transition: $theTransition;
+      -o-transition: $theTransition;
+      transition: $theTransition;
+    }
+
+    &[class*="active"]
+    {
+      background-color: $primary;
+      color: $primary-invert;
+    }
+  }
+}
+
+.pop-up
+{
+  transform-origin: bottom center;
+  $theTransition: transform 0.25s, background-color 0.25s;
+  -webkit-transition: $theTransition;
+  -moz-transition: $theTransition;
+  -ms-transition: $theTransition;
+  -o-transition: $theTransition;
+  transition: $theTransition;
+
+  &:hover
+  {
+    transform: scale(1.25);
+    background-color: $primary-low;
+    color: $white;
+    -webkit-transition: $theTransition;
+    -moz-transition: $theTransition;
+    -ms-transition: $theTransition;
+    -o-transition: $theTransition;
+    transition: $theTransition;
+  }
+}
