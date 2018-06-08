@@ -87,7 +87,7 @@ html, body, div {
     -ms-transition: background-color 0.5s, color 0.25s, margin 0.25s;
     -o-transition: background-color 0.5s, color 0.25s, margin 0.25s;
     transition: background-color 0.5s, color 0.25s, margin 0.25s; }
-    .nav-bar a[class*="brand"] img {
+    .nav-bar a[class*="brand"] > img {
       height: 75%;
       object-fit: contain;
       filter: drop-shadow(0 0 0); }
@@ -103,6 +103,8 @@ html, body, div {
     .nav-bar a[class*="active"] {
       background-color: #A0CED9;
       color: #fff; }
+      .nav-bar a[class*="active"] > img {
+        filter: brightness(100); }
 
 .pop-up {
   transform-origin: bottom center;

@@ -172,7 +172,7 @@ html, body, div
 
     &[class*="brand"]
     {
-      img
+      & > img
       {
         height: 75%;
         object-fit: contain;
@@ -196,6 +196,10 @@ html, body, div
     {
       background-color: $primary;
       color: $primary-invert;
+      & > img
+      {
+        filter: brightness(100);
+      }
     }
   }
 }
