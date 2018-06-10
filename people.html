@@ -4,7 +4,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>B110</title>
-	<script src="http://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
 	<link rel="icon" href="b110-logo-favicon.png" type="image/x-icon"/>
 	<link rel="stylesheet" href="people.css">
 </head>
@@ -23,109 +22,14 @@
 <div id="black-screen" class="none">
 	<div class="pressable" onclick="blackScreenClicked()"></div>
 	<div class="person-info">
-
+		<div class="two-line-title title">
+			<h1 class="title text-bold">Lê Tiến Thành</h1>
+			<h3 class="subtitle">Director</h3>
+		</div>
 	</div>
+	<img id="pop-up-avatar" class="person-image" src=""/>
 </div>
 </body>
 </html>
 
-<script>
-	var data = getAllData();
-	var currentPickedPerson = null;
-	makeGrid(document.getElementById("gridHere"));
-
-	function makeGrid(div)
-	{
-		var rows = 6;
-		var columns = 7;
-		div.style["grid-template-rows"] = dupeString("auto ", rows);
-		div.style["grid-template-columns"] = dupeString("auto ", columns);
-		for (var i = 0; i < rows; i++)
-		{
-			for (var j = 0; j < columns; j++)
-			{
-				div.appendChild(makePerson(Math.random() <= 0.5 ? "thanh" : null));
-			}
-		}
-	}
-
-	function makePerson(id)
-	{
-		var person = document.createElement("div");
-		person.classList.add("person");
-		person.id = "person-" + (id == null ? "#" : id);
-
-		if (id != null)
-		{
-			var image = document.createElement("img");
-			image.classList.add("person-avatar");
-			image.setAttribute("src", "https://scontent.fhan3-2.fna.fbcdn.net/v/t1.0-9/22050173_1563229980409582_5308385319638260138_n.jpg?_nc_cat=0&oh=f954de981ed4410d393cb32bd2c079ff&oe=5B76A2EE");
-			person.appendChild(image);
-			image.onclick = function ()
-			{
-				pressOnPersonAvatar(image);
-			};
-		}
-
-		return person;
-	}
-
-	function pressOnPersonAvatar(imgDiv)
-	{
-		imgDiv.classList.toggle("picked");
-
-		var blackScreenClasses = document.getElementById("black-screen").classList;
-		var gridClasses = document.getElementById("gridHere").classList;
-		var picked = imgDiv.classList.contains("picked");
-
-		if (picked)
-		{
-			currentPickedPerson = imgDiv;
-			blackScreenClasses.remove("none");
-			if (!gridClasses.contains("blurred")) gridClasses.add("blurred");
-			populateDesc(imgDiv.id.substr(7));
-		}
-		else
-		{
-			currentPickedPerson = null;
-			if (!blackScreenClasses.contains("none")) blackScreenClasses.add("none");
-			gridClasses.remove("blurred");
-		}
-	}
-
-	function blackScreenClicked()
-	{
-		if (currentPickedPerson != null) pressOnPersonAvatar(currentPickedPerson);
-	}
-
-	function populateDesc(id)
-	{
-
-	}
-
-	function getAllData()
-	{
-		var dict = {};
-
-		var http = new XMLHttpRequest();
-		http.open("GET", "dbconnect.php", true);
-		http.onreadystatechange = function ()
-		{
-			dict['data'] = http.responseText;
-		}
-		var query = "select * from people";
-		http.send("query=" + encodeURI(query));
-
-		return dict;
-	}
-
-	function dupeString(str, times)
-	{
-		var ret = "";
-		for (var i = 0; i < times; i++)
-		{
-			ret += str;
-		}
-		return ret.trim();
-	}
-</script>
+<script src="people.js"></script>

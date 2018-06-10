@@ -161,6 +161,21 @@ body
   text-shadow: $text-shadow;
 }
 
+.text-normal
+{
+  font-weight: normal;
+}
+
+.text-bold
+{
+  font-weight: bold;
+}
+
+.text-light
+{
+  font-weight: lighter;
+}
+
 .nav-bar
 {
   height: 100%;

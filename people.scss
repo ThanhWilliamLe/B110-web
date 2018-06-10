@@ -1,5 +1,7 @@
 @import "mainstyle";
 
+$border-dash: 3px dashed $primary-dark;
+
 .content
 {
   flex-grow: 1;
@@ -9,46 +11,40 @@
 .ppl-group
 {
   flex-grow: 1;
-  display: inline-grid;
-  grid-gap: 3em;
-}
-
-.person
-{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  & > .person-avatar
+  justify-content: space-evenly;
+  & > .ppl-group-row
   {
-    cursor: pointer;
-    margin: auto;
-    width: 100%;
-    object-fit: contain;
-    border-radius: 50%;;
-    border: 4px dashed $primary-dark;
-    $transition: transform 0.5s, position 0.5s, top 0.5s, left 0.5s;
-    -webkit-transition: $transition;
-    -moz-transition: $transition;
-    -ms-transition: $transition;
-    -o-transition: $transition;
-    transition: $transition;
-    &:hover:not([class*="picked"])
+    height: 20vh;
+    display: flex;
+    justify-content: space-evenly;
+    & > .person
     {
-      $transform: scale(1.25);
-      -webkit-transform: $transform;
-      -moz-transform: $transform;
-      -ms-transform: $transform;
-      -o-transform: $transform;
-      transform: $transform;
-    }
-    &[class*="picked"]
-    {
-      z-index: 999;
-      position: fixed;
-      top: 5vh;
-      left: 5vh;
-      width: 15em;
-      height: 15em;
+      flex-shrink: 1;
+      display: flex;
+      & > .person-avatar
+      {
+        cursor: pointer;
+        object-fit: contain;
+        border-radius: 50%;
+        border: $border-dash;
+        $transition: transform 0.5s, position 0.5s, top 0.5s, left 0.5s;
+        -webkit-transition: $transition;
+        -moz-transition: $transition;
+        -ms-transition: $transition;
+        -o-transition: $transition;
+        transition: $transition;
+        &:hover:not([class*="picked"])
+        {
+          $transform: scale(1.25);
+          -webkit-transform: $transform;
+          -moz-transform: $transform;
+          -ms-transform: $transform;
+          -o-transform: $transform;
+          transform: $transform;
+        }
+      }
     }
   }
 }
@@ -68,14 +64,41 @@
     width: 100%;
     height: 100%;
   }
+
+  & > .person-info
+  {
+    position: absolute;
+    top: calc(5vh + 7.5em);
+    left: calc(5vh + 7.5em);
+    bottom: 5em;
+    right: 5em;
+    background-color: $white;
+    border-radius: 2em;
+    border: $border-dash;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1em;
+  }
+
+  & > .person-image
+  {
+    position: absolute;
+    top: 5vh;
+    left: 5vh;
+    width: 15em;
+    height: 15em;
+    margin: auto;
+    object-fit: contain;
+    border-radius: 50%;
+    border: $border-dash;
+  }
 }
 
 .person-info
 {
-  position: absolute;
-  top: calc(5vh + 7.5em);
-  left: calc(5vh + 7.5em);
-  bottom: 5em;
-  right: 5em;
-  background-color: $primary-dark;
+  & > .title
+  {
+    margin-left: 9em;
+  }
 }
