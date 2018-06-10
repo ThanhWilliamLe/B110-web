@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;subset=vietnamese");
+
 $blue: #A0CED9;
 $pink: #F2A4A4;
 $green: #ADF7B6;
@@ -46,6 +48,24 @@ html, body, div
 {
   margin: 0;
   padding: 0;
+}
+
+body
+{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0 2em;
+}
+
+.header
+{
+  background-color: $primary-bg;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 5em;
 }
 
 .margin-big
@@ -143,7 +163,7 @@ html, body, div
 
 .nav-bar
 {
-  height: 4em;
+  height: 100%;
   display: flex;
   justify-content: stretch;
   background-color: $primary-low;
@@ -162,7 +182,7 @@ html, body, div
     text-align: center;
     text-decoration: none;
     text-shadow: $text-shadow;
-    font-weight: bolder;
+    font-weight: lighter;
     box-shadow: $outer-shadow;
     -webkit-transition: $theTransition;
     -moz-transition: $theTransition;
@@ -185,11 +205,6 @@ html, body, div
       background-color: $primary;
       color: $primary-invert;
       margin: 0.5em;
-      -webkit-transition: $theTransition;
-      -moz-transition: $theTransition;
-      -ms-transition: $theTransition;
-      -o-transition: $theTransition;
-      transition: $theTransition;
     }
 
     &[class*="active"]
@@ -218,11 +233,20 @@ html, body, div
   {
     transform: scale(1.25);
     background-color: $primary-low;
-    color: $white;
-    -webkit-transition: $theTransition;
-    -moz-transition: $theTransition;
-    -ms-transition: $theTransition;
-    -o-transition: $theTransition;
-    transition: $theTransition;
-  }
+    color: $white;  }
+}
+
+.none
+{
+  display: none !important;
+}
+
+.blurred
+{
+  $blur : blur(5px);
+  -webkit-filter: $blur;
+  -moz-filter: $blur;
+  -o-filter: $blur;
+  -ms-filter: $blur;
+  filter: $blur;
 }
