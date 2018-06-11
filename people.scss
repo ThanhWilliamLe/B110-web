@@ -21,10 +21,12 @@ $border-dash: 3px dashed $primary-dark;
     justify-content: space-evenly;
     & > .person
     {
-      flex-shrink: 1;
-      display: flex;
+      display: block;
+      height: 100%;
       & > .person-avatar
       {
+        height: 100%;
+        width: auto;
         cursor: pointer;
         object-fit: contain;
         border-radius: 50%;
@@ -58,6 +60,21 @@ $border-dash: 3px dashed $primary-dark;
   right: 0;
   display: block;
   background-color: $dark-overlay;
+  $transition: opacity .25s;
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+  opacity: 1;
+
+  &[class*="none"]
+  {
+    display: block !important;
+    pointer-events: none;
+    opacity:0;
+  }
+
   & > .pressable
   {
     position: absolute;
