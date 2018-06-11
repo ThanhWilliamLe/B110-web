@@ -72,7 +72,7 @@ $border-dash: 3px dashed $primary-dark;
   {
     display: block !important;
     pointer-events: none;
-    opacity:0;
+    opacity: 0;
   }
 
   & > .pressable
@@ -96,6 +96,29 @@ $border-dash: 3px dashed $primary-dark;
     flex-direction: column;
     justify-content: space-between;
     padding: 1em;
+
+    & > .separator
+    {
+      margin: 1em 3em;
+      height: 3px;
+      background-color: $dark-overlay;
+      border-radius: 2px;
+    }
+
+    & > .info
+    {
+      margin: 0.75em 3em;
+      font-size: large;
+      font-weight: normal;
+      & > v
+      {
+        font-weight: 300;
+      }
+    }
+    & > .fill
+    {
+      flex-grow: 1;
+    }
   }
 
   & > .person-image
