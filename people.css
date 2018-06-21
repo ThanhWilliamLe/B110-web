@@ -1,12 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;subset=vietnamese");
 * {
   font-family: "Roboto";
-  color: #444;
+  color: white;
 }
 
 html, body, div {
   margin: 0;
   padding: 0;
+  background-color: #2b2b2b;
 }
 
 body {
@@ -17,7 +18,7 @@ body {
 }
 
 .header {
-  background-color: white;
+  background-color: #444444;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -93,7 +94,7 @@ body {
 }
 
 .color-primary {
-  color: #A0CED9;
+  color: #62C1EA;
 }
 
 .text-shadow {
@@ -116,7 +117,8 @@ body {
   height: 100%;
   display: flex;
   justify-content: stretch;
-  background-color: #c6e0e6;
+  background-color: #444444;
+  color: white;
 }
 .nav-bar a {
   flex-grow: 1;
@@ -125,35 +127,34 @@ body {
   justify-content: center;
   width: auto;
   height: 100%;
-  background-color: #fff;
+  background-color: #2b2b2b;
   font-size: large;
   text-align: center;
   text-decoration: none;
   text-shadow: 0 0 0;
-  font-weight: lighter;
-  box-shadow: 0 0px 10px rgba(68, 68, 68, 0.15);
+  font-weight: 400;
+  box-shadow: 0 0px 10px rgba(17, 17, 17, 0.75);
   -webkit-transition: background-color 0.5s, color 0.25s, margin 0.25s;
   -moz-transition: background-color 0.5s, color 0.25s, margin 0.25s;
   -ms-transition: background-color 0.5s, color 0.25s, margin 0.25s;
   -o-transition: background-color 0.5s, color 0.25s, margin 0.25s;
   transition: background-color 0.5s, color 0.25s, margin 0.25s;
+  color: white;
 }
 .nav-bar a[class*=brand] > img {
   height: 75%;
   object-fit: contain;
   filter: drop-shadow(0 0 0);
 }
-.nav-bar a:hover {
-  background-color: #A0CED9;
-  color: #fff;
-  margin: 0.5em;
-}
 .nav-bar a[class*=active] {
-  background-color: #A0CED9;
-  color: #fff;
+  background-color: #444444;
 }
 .nav-bar a[class*=active] > img {
   filter: brightness(100);
+}
+.nav-bar a:hover {
+  background-color: #6a6a6a;
+  margin: 0.5em;
 }
 
 .pop-up {
@@ -166,8 +167,7 @@ body {
 }
 .pop-up:hover {
   transform: scale(1.25);
-  background-color: #c6e0e6;
-  color: #fff;
+  background-color: #444444;
 }
 
 .none {
@@ -208,7 +208,8 @@ body {
   cursor: pointer;
   object-fit: contain;
   border-radius: 50%;
-  border: 3px dashed #7cbbca;
+  border: 2px dashed #62C1EA;
+  box-shadow: 0 0px 10px rgba(17, 17, 17, 0.75);
   -webkit-transition: transform 0.5s, position 0.5s, top 0.5s, left 0.5s;
   -moz-transition: transform 0.5s, position 0.5s, top 0.5s, left 0.5s;
   -ms-transition: transform 0.5s, position 0.5s, top 0.5s, left 0.5s;
@@ -230,13 +231,13 @@ body {
   left: 0;
   right: 0;
   display: block;
-  background-color: rgba(0, 0, 0, 0.5);
-  -webkit-transition: opacity 0.25s, 0.25s;
-  -moz-transition: opacity 0.25s, 0.25s;
-  -ms-transition: opacity 0.25s, 0.25s;
-  -o-transition: opacity 0.25s, 0.25s;
-  transition: opacity 0.25s, 0.25s;
+  -webkit-transition: opacity 0.25s;
+  -moz-transition: opacity 0.25s;
+  -ms-transition: opacity 0.25s;
+  -o-transition: opacity 0.25s;
+  transition: opacity 0.25s;
   opacity: 1;
+  background-color: unset;
 }
 #black-screen[class*=none] {
   display: block !important;
@@ -247,6 +248,7 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 #black-screen > .person-info {
   position: absolute;
@@ -256,7 +258,7 @@ body {
   right: 5em;
   background-color: #fff;
   border-radius: 2em;
-  border: 3px dashed #7cbbca;
+  border: 2px dashed #62C1EA;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -271,7 +273,7 @@ body {
   margin: auto;
   object-fit: contain;
   border-radius: 50%;
-  border: 3px dashed #7cbbca;
+  border: 2px dashed #62C1EA;
 }
 
 .person-info > .title {
