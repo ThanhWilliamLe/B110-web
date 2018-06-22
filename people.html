@@ -23,13 +23,13 @@
 <div id="black-screen" class="none">
 	<div class="pressable" onclick="blackScreenClicked()"></div>
 	<div class="person-info">
-		<div class="two-line-title title">
-			<h1 class="title text-bold">{fullname} {nickname}</h1>
-			<h3 class="subtitle">{position}</h3>
+		<div class="two-line-title main-info">
+			<h1 class="title text-bold pi-data" data-identifier="name" data-datatag="name-all" data-content="{name}"></h1>
+			<h3 class="subtitle text-bold color-accent pi-data" data-identifier="position" data-datatag="position" data-content="{position}"></h3>
 		</div>
-		<div class="separator"></div>
-		<div class="info" id="dob"><v>• Ngày sinh: </v>{dob}</div>
-		<div class="info fill" id="desc"><v>• Everything else</v></div>
+		<div class="info pi-data" data-identifier="dance" data-datatag="dance" data-content="• {dance}"></div>
+		<div class="info pi-data" data-identifier="dob" data-datatag="dob" data-content="• Chào đời ngày {dob}"></div>
+		<div class="info fill pi-data text-light text-italic" data-identifier="bio" data-datatag="bio" data-content='"{bio}"'></div>
 	</div>
 	<img id="pop-up-avatar" class="person-image" src=""/>
 </div>

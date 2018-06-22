@@ -81,38 +81,52 @@ $border-dash: 2px dashed $primary;
     background-color: $dark-overlay;
   }
 
+  $infoPadding: 10vw;
+
   & > .person-info
   {
     position: absolute;
-    top: calc(5vh + 7.5em);
-    left: calc(5vh + 7.5em);
-    bottom: 5em;
-    right: 5em;
-    background-color: $white;
-    border-radius: 2em;
+    top: $infoPadding;
+    bottom: $infoPadding;
+    left: $infoPadding;
+    right: $infoPadding;
+    background-color: $bg-color;
+    border-radius: 5em 2em 2em 2em;
     border: $border-dash;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 1em;
+    overflow: hidden;
 
-    & > .separator
+    & *
     {
-      margin: 1em 3em;
-      height: 3px;
-      background-color: $dark-overlay;
-      border-radius: 2px;
+      background: unset;
+    }
+
+    & > .main-info
+    {
+      height: 10em;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 5em;
+      padding-left: 7em;
+      width: calc(100% - 12em);
+      background: linear-gradient(90deg, transparentize($primary, 0.5), transparentize($primary, 0.9));
+      margin-bottom: 1em;
+    }
+
+    & .separator
+    {
+      height: 2px;
+      background-color: $primary;
     }
 
     & > .info
     {
       margin: 0.75em 3em;
       font-size: large;
-      font-weight: normal;
-      & > v
-      {
-        font-weight: 300;
-      }
+      font-weight: 200;
     }
     & > .fill
     {
@@ -123,21 +137,13 @@ $border-dash: 2px dashed $primary;
   & > .person-image
   {
     position: absolute;
-    top: 5vh;
-    left: 5vh;
-    width: 15em;
-    height: 15em;
+    top: $infoPadding;
+    left: $infoPadding;
+    width: 10em;
+    height: 10em;
     margin: auto;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 50%;
     border: $border-dash;
-  }
-}
-
-.person-info
-{
-  & > .title
-  {
-    margin-left: 9em;
   }
 }

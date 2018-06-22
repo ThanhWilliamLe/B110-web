@@ -4,12 +4,13 @@ $blue: #77B6EA;
 $pink: #F2A4A4;
 $green: #ADF7B6;
 $yellow: #FFEE93;
-$orange: #FCC271;
+$orange: #f5942b;
 $white: #fff;
+$black: #000;
 $dark: #111;
 $dark-light: lighten($dark, 10%);
-$black: #111;
 $dark-overlay: rgba(#000000, 0.5);
+
 // Add a serif family
 $family-serif: "Roboto";
 
@@ -17,18 +18,19 @@ $family-serif: "Roboto";
 $primary: #62C1EA;
 $primary-light: lighten(desaturate($primary, 10%), 20%);
 $primary-dark: darken(desaturate($primary, 15%), 20%);
+$primary-bg: darken(desaturate($primary, 60%), 40%);
 
 $primary-invert: $white;
 
-$secondary: $orange;
-$secondary-dark: darken($secondary, 10%);
+$accent: $orange;
+$accent-dark: darken($accent, 10%);
 
 $bg-color: $dark-light;
 $bg-color-light: lighten($bg-color, 10%);
 $bg-color-bright: lighten($bg-color-light, 15%);
 
 $shadow-color: transparentize($dark, 0.85);
-$shadow-color-strong: transparentize($dark, 0.25);
+$shadow-color-strong: transparentize($dark, 0.1);
 
 $family-primary: $family-serif;
 
@@ -38,7 +40,7 @@ $outer-shadow: 0 0px 10px $shadow-color;
 
 $shadow-strong: 3px 3px 5px $shadow-color-strong;
 $bottom-shadow-strong: 0 5px 5px $shadow-color-strong;
-$outer-shadow-strong: 0 0px 10px $shadow-color-strong;
+$outer-shadow-strong: 0 0px 15px $shadow-color-strong;
 
 $text-color-primary: darken($white, 0);
 $text-shadow: 0 0 0;
@@ -162,6 +164,11 @@ body
   color: $primary;
 }
 
+.color-accent
+{
+  color: $accent;
+}
+
 .text-shadow
 {
   text-shadow: $text-shadow;
@@ -169,17 +176,22 @@ body
 
 .text-normal
 {
-  font-weight: normal;
+  font-weight: 400;
 }
 
 .text-bold
 {
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .text-light
 {
-  font-weight: lighter;
+  font-weight: 100;
+}
+
+.text-italic
+{
+  font-style: italic;
 }
 
 .nav-bar
@@ -225,7 +237,7 @@ body
 
     &[class*="active"]
     {
-      background-color: $bg-color-light;
+      background-color: $primary-bg;
       & > img
       {
         filter: brightness(100);

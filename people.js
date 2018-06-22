@@ -1,21 +1,13 @@
-var dbColumns = ['id', 'fullname', 'firstname', 'lastname', 'nickname', 'dob', 'male', 'gen', 'phone', 'email', 'facebook', 'address',
-	'country', 'city', 'dancer', 'choreographer', 'portrait', 'identifier', 'idfile', 'bio'];
-
+var gridDOM = document.getElementById("gridHere");
+var dbColumns = ['id', 'fullname', 'firstname', 'lastname', 'nickname', 'dob', 'male', 'gen', 'phone', 'email', 'facebook',
+	'address', 'country', 'city', 'dancer', 'choreographer', 'portrait', 'identifier', 'idfile', 'bio', 'top-pos',
+	'pos-en', 'pos-vn'];
 var peoplePosition = [
 	['thanhle', 'huongmin'],
 	['phuongly', 'linhte', 'hoaiham'],
 	['quynhmyt', 'hoangseu', 'yencho', 'vutruong'],
 	['haiyen', 'hoaithu', 'camtu', 'thanhduong']
 ];
-peoplePosition = [
-	['thanhle', 'hoaiham', 'thanhle', 'hoaiham'],
-	['hoangseu', 'yencho', 'vutruong', 'vutruong'],
-	['haiyen', 'hoaithu', 'haiyen', 'yencho'],
-	['haiyen', 'hoaithu', 'haiyen', 'yencho'],
-	['haiyen', 'hoaithu', 'haiyen', 'yencho'],
-	['hoangseu', 'yencho', 'vutruong', 'vutruong']
-];
-var gridDOM = document.getElementById("gridHere");
 var data = {};
 var currentPickedPerson = null;
 
@@ -26,13 +18,16 @@ getAllData();
 function populateFromCache()
 {
 	var cached = localStorage['b110people'];
-	if (!!cached) dataAcquired(JSON.parse(cached), false);
+	if (cached) dataAcquired(JSON.parse(cached), false);
 }
 
 function dataAcquired(dict, doCache)
 {
 	data = dict;
-	if (doCache) localStorage['b110people'] = JSON.stringify(dict);
+	if (doCache)
+	{
+		localStorage['b110people'] = JSON.stringify(dict);
+	}
 
 	makeGrid(gridDOM);
 	resizeGridChildren();
@@ -47,16 +42,15 @@ function resizeGridChildren()
 {
 	var rowHeight = gridDOM.clientHeight / peoplePosition.length;
 	var cellWidth = -1;
-	for (var i in peoplePosition)
+	peoplePosition.forEach(function (peopleRow)
 	{
-		var peopleRow = peoplePosition[i];
 		var singleWidth = gridDOM.clientWidth / peopleRow.length;
 		if (cellWidth === -1 || singleWidth < cellWidth) cellWidth = singleWidth;
-	}
+	});
 	var ratio = 0.8;
 	var cellSize = Math.min(rowHeight, cellWidth) * ratio;
 
-	console.log($('.header').height() + "  " + rowHeight + "  " + cellWidth);
+	//console.log($('.header').height() + "  " + rowHeight + "  " + cellWidth);
 
 	$(gridDOM).find(".ppl-group-row").height(rowHeight * ratio);
 	$(gridDOM).find(".person").height(cellSize);
@@ -88,7 +82,6 @@ function makePerson(id)
 {
 	var person = document.createElement("div");
 	person.classList.add("person");
-	person.id = "person-" + (id == null ? "#" : id);
 
 	if (id != null)
 	{
@@ -96,6 +89,7 @@ function makePerson(id)
 
 		var image = document.createElement("img");
 		image.classList.add("person-avatar");
+		image.id = "person-" + (id == null ? "#" : id);
 		if (personData != null) image.setAttribute("src", personData['portrait']);
 		image.onclick = function ()
 		{
@@ -132,7 +126,20 @@ function pressOnPersonAvatar(imgDiv)
 
 function populateDesc(id)
 {
+	var personData = data[id];
+	if (!personData) return;
 
+	personData = JSON.parse(JSON.stringify(personData));
+	personData['position'] = true ? personData['pos-vn'] : personData['pos-en'];
+	personData['position'] = personData['position'].toUpperCase();
+	personData['name-all'] = personData['fullname'] + (!personData['nickname'] ? '' : (' - ' + personData['nickname']));
+	personData['name-all'] = personData['name-all'].toUpperCase();
+	personData['dance'] = 'Dancer' + (personData['choreographer'] === "t" ? " & Choreographer" : "");
+
+	$('.person-info .pi-data').each(function ()
+	{
+		this.innerHTML = this.dataset.content.replace('{' + this.dataset.identifier + '}', personData[this.dataset.datatag]);
+	});
 }
 
 function blackScreenClicked()
@@ -142,36 +149,52 @@ function blackScreenClicked()
 
 function getAllData()
 {
-	var query = "select * from people";
-
-	var http = new XMLHttpRequest();
-	http.open("GET", "dbconnect.php?query=" + encodeURI(query), true);
-	http.onreadystatechange = function ()
+	query("select people.*, positions.en, positions.vn " +
+		"from people " +
+		"inner join positions " +
+		"on people.toppos = positions.id", true, function (http)
 	{
 		if (http.readyState === 4 && http.status === 200)
 		{
-			var dict = {};
-
-			var response = http.responseText;
-			var rows = response.split("#&#");
-			for (var i in rows)
-			{
-				var personDict = {};
-				var row = rows[i];
-				var rowSplit = row.split("|");
-				for (var i1 in rowSplit)
-				{
-					var value = rowSplit[i1];
-					var key = dbColumns[i1];
-					personDict[key] = value;
-				}
-				dict[personDict['identifier']] = personDict;
-			}
-
+			var dict = queryStringToArray('identifier', dbColumns, http.responseText);
 			dataAcquired(dict, true);
 		}
-	}
+	});
+}
+
+function query(queryStr, async, callback)
+{
+	var http = new XMLHttpRequest();
+	http.open("GET", "dbconnect.php?query=" + encodeURI(queryStr), async);
+	http.onreadystatechange = function ()
+	{
+		callback(http);
+	};
 	http.send();
+}
+
+function queryStringToArray(identifier, headers, queryResult)
+{
+	var dict = {};
+
+	var rows = queryResult.split("#&#");
+	for (var i in rows)
+	{
+		var row = rows[i];
+		var rowSplit = row.split("|");
+		var innerDict = {};
+		for (var i1 in rowSplit)
+		{
+			var value = rowSplit[i1];
+			// TODO  :
+			value = value.replace("#nl#", '\n').replace("#rl#",'\r');
+			var key = headers[i1];
+			innerDict[key] = value;
+		}
+		dict[innerDict[identifier]] = innerDict;
+	}
+
+	return dict;
 }
 
 function dupeString(str, times)
