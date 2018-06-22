@@ -1,14 +1,76 @@
+var dbColumns = ['id', 'fullname', 'firstname', 'lastname', 'nickname', 'dob', 'male', 'gen', 'phone', 'email', 'facebook', 'address',
+	'country', 'city', 'dancer', 'choreographer', 'portrait', 'identifier', 'idfile', 'bio'];
+
 var peoplePosition = [
-	["thanh", "hmin"],
-	["ly", "te", "hoai"],
-	["ly", "te", "hoai"]
+	['thanhle', 'huongmin'],
+	['phuongly', 'linhte', 'hoaiham'],
+	['quynhmyt', 'hoangseu', 'yencho', 'vutruong'],
+	['haiyen', 'hoaithu', 'camtu', 'thanhduong']
 ];
-var data = getAllData();
+peoplePosition = [
+	['thanhle', 'hoaiham', 'thanhle', 'hoaiham'],
+	['hoangseu', 'yencho', 'vutruong', 'vutruong'],
+	['haiyen', 'hoaithu', 'haiyen', 'yencho'],
+	['haiyen', 'hoaithu', 'haiyen', 'yencho'],
+	['haiyen', 'hoaithu', 'haiyen', 'yencho'],
+	['hoangseu', 'yencho', 'vutruong', 'vutruong']
+];
+var gridDOM = document.getElementById("gridHere");
+var data = {};
 var currentPickedPerson = null;
-makeGrid(document.getElementById("gridHere"));
+
+$(window).resize(gridResized);
+populateFromCache();
+getAllData();
+
+function populateFromCache()
+{
+	var cached = localStorage['b110people'];
+	if (!!cached) dataAcquired(JSON.parse(cached), false);
+}
+
+function dataAcquired(dict, doCache)
+{
+	data = dict;
+	if (doCache) localStorage['b110people'] = JSON.stringify(dict);
+
+	makeGrid(gridDOM);
+	resizeGridChildren();
+}
+
+function gridResized()
+{
+	resizeGridChildren();
+}
+
+function resizeGridChildren()
+{
+	var rowHeight = gridDOM.clientHeight / peoplePosition.length;
+	var cellWidth = -1;
+	for (var i in peoplePosition)
+	{
+		var peopleRow = peoplePosition[i];
+		var singleWidth = gridDOM.clientWidth / peopleRow.length;
+		if (cellWidth === -1 || singleWidth < cellWidth) cellWidth = singleWidth;
+	}
+	var ratio = 0.8;
+	var cellSize = Math.min(rowHeight, cellWidth) * ratio;
+
+	console.log($('.header').height() + "  " + rowHeight + "  " + cellWidth);
+
+	$(gridDOM).find(".ppl-group-row").height(rowHeight * ratio);
+	$(gridDOM).find(".person").height(cellSize);
+	$(gridDOM).find(".person").width(cellSize);
+	$(gridDOM).find(".person-avatar").height(cellSize);
+	$(gridDOM).find(".person-avatar").width(cellSize);
+}
 
 function makeGrid(div)
 {
+	while (div.firstChild)
+	{
+		div.removeChild(div.firstChild);
+	}
 	for (var i = 0; i < peoplePosition.length; i++)
 	{
 		var peopleRow = peoplePosition[i];
@@ -30,16 +92,17 @@ function makePerson(id)
 
 	if (id != null)
 	{
+		var personData = data[id];
+
 		var image = document.createElement("img");
 		image.classList.add("person-avatar");
-		image.setAttribute("src", "https://scontent.fhan3-2.fna.fbcdn.net/v/t1.0-9/22050173_1563229980409582_5308385319638260138_n.jpg?_nc_cat=0&oh=f954de981ed4410d393cb32bd2c079ff&oe=5B76A2EE");
+		if (personData != null) image.setAttribute("src", personData['portrait']);
 		image.onclick = function ()
 		{
 			pressOnPersonAvatar(image);
 		};
 		person.appendChild(image);
 	}
-
 	return person;
 }
 
@@ -67,30 +130,48 @@ function pressOnPersonAvatar(imgDiv)
 	}
 }
 
-function blackScreenClicked()
-{
-	if (currentPickedPerson != null) pressOnPersonAvatar(currentPickedPerson);
-}
-
 function populateDesc(id)
 {
 
 }
 
+function blackScreenClicked()
+{
+	if (currentPickedPerson != null) pressOnPersonAvatar(currentPickedPerson);
+}
+
 function getAllData()
 {
-	var dict = {};
+	var query = "select * from people";
 
 	var http = new XMLHttpRequest();
-	http.open("GET", "dbconnect.php", true);
+	http.open("GET", "dbconnect.php?query=" + encodeURI(query), true);
 	http.onreadystatechange = function ()
 	{
-		dict['data'] = http.responseText;
-	}
-	var query = "select * from people";
-	http.send("query=" + encodeURI(query));
+		if (http.readyState === 4 && http.status === 200)
+		{
+			var dict = {};
 
-	return dict;
+			var response = http.responseText;
+			var rows = response.split("#&#");
+			for (var i in rows)
+			{
+				var personDict = {};
+				var row = rows[i];
+				var rowSplit = row.split("|");
+				for (var i1 in rowSplit)
+				{
+					var value = rowSplit[i1];
+					var key = dbColumns[i1];
+					personDict[key] = value;
+				}
+				dict[personDict['identifier']] = personDict;
+			}
+
+			dataAcquired(dict, true);
+		}
+	}
+	http.send();
 }
 
 function dupeString(str, times)

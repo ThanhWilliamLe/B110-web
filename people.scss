@@ -4,7 +4,7 @@ $border-dash: 2px dashed $primary;
 
 .content
 {
-  flex-grow: 1;
+  height: 90vh;
   display: flex;
 }
 
@@ -16,19 +16,16 @@ $border-dash: 2px dashed $primary;
   justify-content: space-evenly;
   & > .ppl-group-row
   {
-    height: 20vh;
     display: flex;
     justify-content: space-evenly;
     & > .person
     {
-      display: block;
-      height: 100%;
+      background: transparent none;
       & > .person-avatar
       {
-        height: 100%;
-        width: auto;
+        margin: auto;
         cursor: pointer;
-        object-fit: contain;
+        object-fit: cover;
         border-radius: 50%;
         border: $border-dash;
         box-shadow: $outer-shadow-strong;
