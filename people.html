@@ -24,12 +24,29 @@
 	<div class="pressable" onclick="blackScreenClicked()"></div>
 	<div class="person-info">
 		<div class="two-line-title main-info">
-			<h1 class="title text-bold pi-data" data-identifier="name" data-datatag="name-all" data-content="{name}"></h1>
-			<h3 class="subtitle text-bold color-accent pi-data" data-identifier="position" data-datatag="position" data-content="{position}"></h3>
+			<h1 class="title text-bold pi-data" data-identifier="x" data-datatag="name-all" data-content="{x}"></h1>
+			<h3 class="subtitle text-bold color-accent pi-data" data-identifier="x" data-datatag="position"
+			    data-content="{x}"></h3>
 		</div>
-		<div class="info pi-data" data-identifier="dance" data-datatag="dance" data-content="• {dance}"></div>
-		<div class="info pi-data" data-identifier="dob" data-datatag="dob" data-content="• Chào đời ngày {dob}"></div>
-		<div class="info fill pi-data text-light text-italic" data-identifier="bio" data-datatag="bio" data-content='"{bio}"'></div>
+		<div class="sub-info">
+			<div class="info pi-data" data-identifier="x" data-datatag="dance" data-content="• {x}"></div>
+			<div class="info pi-data" data-identifier="x" data-datatag="gen"
+			     data-contentvn="• K{x}" data-contenten="• Gen {x}"></div>
+			<div class="info pi-data" data-identifier="x" data-datatag="dob"
+			     data-contentvn="• Chào đời ngày <v>{x}</v>" data-contenten="• Born on <v>{x}</v>"></div>
+			<div class="info pi-data" data-identifier="x" data-datatag="phone"
+			     data-contentvn="• Sđt: <v>{x}</v>" data-contenten="• Phone: <v>{x}</v>"></div>
+			<div class="info pi-data" data-identifier="x" data-datatag="email"
+			     data-content="• Email: <v>{x}</v>"></div>
+			<div class="info pi-data" data-identifier="x" data-datatag="facebook"
+			     data-content="• Facebook: <v>{x}</v>"></div>
+			<div class="info pi-data" data-identifier="x" data-datatag="address"
+			     data-contentvn="• Địa chỉ: {x}" data-contenten="• Address: {x}"></div>
+			<div class="info pi-data" data-identifier="x" data-datatag="city"
+			     data-contentvn="• Nguyên quán: {x}" data-contenten="• Hometown: {x}"></div>
+			<div class="info fill pi-data text-light text-italic"
+			     data-identifier="x" data-datatag="bio" data-content='"{x}"'></div>
+		</div>
 	</div>
 	<img id="pop-up-avatar" class="person-image" src=""/>
 </div>

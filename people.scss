@@ -116,21 +116,42 @@ $border-dash: 2px dashed $primary;
       margin-bottom: 1em;
     }
 
-    & .separator
-    {
-      height: 2px;
-      background-color: $primary;
-    }
-
-    & > .info
-    {
-      margin: 0.75em 3em;
-      font-size: large;
-      font-weight: 200;
-    }
-    & > .fill
+    & > .sub-info
     {
       flex-grow: 1;
+      overflow-y: scroll;
+
+      &::-webkit-scrollbar
+      {
+        width: 10px;
+      }
+
+      &::-webkit-scrollbar-track
+      {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb
+      {
+        background: $bg-color-bright;
+        border-radius: 10px;
+      }
+
+      & > .info
+      {
+        margin: 0.5em 3em;
+        font-size: large;
+        font-weight: 200;
+        & v
+        {
+          color: $accent;
+          font-weight: 500;
+        }
+      }
+      & > .fill
+      {
+        flex-grow: 1;
+      }
     }
   }
 

@@ -1,13 +1,19 @@
 var gridDOM = document.getElementById("gridHere");
-var dbColumns = ['id', 'fullname', 'firstname', 'lastname', 'nickname', 'dob', 'male', 'gen', 'phone', 'email', 'facebook',
-	'address', 'country', 'city', 'dancer', 'choreographer', 'portrait', 'identifier', 'idfile', 'bio', 'top-pos',
-	'pos-en', 'pos-vn'];
+var dbColumns = ["id", "fullname", "firstname", "lastname", "nickname", "dob", "male", "gen", "phone", "email", "facebook",
+	"address", "country", "city", "dancer", "choreographer", "portrait", "identifier", "idfile", "bio", "top-pos",
+	"pos-en", "pos-vn"];
 var peoplePosition = [
-	['thanhle', 'huongmin'],
-	['phuongly', 'linhte', 'hoaiham'],
-	['quynhmyt', 'hoangseu', 'yencho', 'vutruong'],
-	['haiyen', 'hoaithu', 'camtu', 'thanhduong']
+	["thanhle", "huongmin"],
+	["phuongly", "linhte", "hoaiham"],
+	["quynhmyt", "hoangseu", "yencho", "vutruong"],
+	["haiyen", "hoaithu", "camtu", "thanhduong"]
 ];
+var langStrings =
+	{
+		"Dancer": {"vn": "Vũ công", "en": "Dancer"},
+		"Choreographer": {"vn": "Biên đạo", "en": "Choreographer"},
+	};
+var langVN = false;
 var data = {};
 var currentPickedPerson = null;
 
@@ -130,16 +136,25 @@ function populateDesc(id)
 	if (!personData) return;
 
 	personData = JSON.parse(JSON.stringify(personData));
-	personData['position'] = true ? personData['pos-vn'] : personData['pos-en'];
+	personData['position'] = langVN ? personData['pos-vn'] : personData['pos-en'];
 	personData['position'] = personData['position'].toUpperCase();
+	var dob = new Date(personData['dob']);
+	personData['dob'] = dob.getDate() + "-" + (dob.getMonth() + 1) + "-" + dob.getFullYear();
 	personData['name-all'] = personData['fullname'] + (!personData['nickname'] ? '' : (' - ' + personData['nickname']));
 	personData['name-all'] = personData['name-all'].toUpperCase();
-	personData['dance'] = 'Dancer' + (personData['choreographer'] === "t" ? " & Choreographer" : "");
+	personData['dance'] = getString('Dancer') + (personData['choreographer'] === "t" ? " & " + getString('Choreographer') : "");
 
 	$('.person-info .pi-data').each(function ()
 	{
-		this.innerHTML = this.dataset.content.replace('{' + this.dataset.identifier + '}', personData[this.dataset.datatag]);
+		var theContent = this.dataset.content == null ? (langVN ? this.dataset.contentvn : this.dataset.contenten) : this.dataset.content;
+		this.innerHTML = theContent.replace('{' + this.dataset.identifier + '}', personData[this.dataset.datatag]);
 	});
+}
+
+function getString(id, vn)
+{
+	if (vn == null) vn = langVN;
+	return langStrings[id][vn ? 'vn' : 'en'];
 }
 
 function blackScreenClicked()
@@ -186,8 +201,8 @@ function queryStringToArray(identifier, headers, queryResult)
 		for (var i1 in rowSplit)
 		{
 			var value = rowSplit[i1];
-			// TODO  :
-			value = value.replace("#nl#", '\n').replace("#rl#",'\r');
+			value = value.replace(new RegExp("#nl#", 'g'), "</br>").replace(new RegExp("#rl#", 'g'), "</br>");
+			console.log(value);
 			var key = headers[i1];
 			innerDict[key] = value;
 		}

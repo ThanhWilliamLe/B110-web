@@ -21,6 +21,49 @@ body {
   flex-direction: column;
   justify-content: space-between;
   height: 10vh; }
+  .header .nav-bar {
+    flex-grow: 1;
+    display: flex;
+    justify-content: stretch;
+    background-color: #444444;
+    color: white; }
+    .header .nav-bar a {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: auto;
+      height: inherit;
+      background-color: #2b2b2b;
+      font-size: large;
+      text-align: center;
+      text-decoration: none;
+      text-shadow: 0 0 0;
+      font-weight: 400;
+      box-shadow: 0 0px 15px rgba(17, 17, 17, 0.9);
+      -webkit-transition: background-color 0.5s, color 0.25s, margin 0.25s, transform 0.25s;
+      -moz-transition: background-color 0.5s, color 0.25s, margin 0.25s, transform 0.25s;
+      -ms-transition: background-color 0.5s, color 0.25s, margin 0.25s, transform 0.25s;
+      -o-transition: background-color 0.5s, color 0.25s, margin 0.25s, transform 0.25s;
+      transition: background-color 0.5s, color 0.25s, margin 0.25s, transform 0.25s;
+      color: white; }
+      .header .nav-bar a[class*="brand"] > img {
+        height: 75%;
+        object-fit: contain;
+        filter: drop-shadow(0 0 0); }
+      .header .nav-bar a[class*="active"] {
+        background-color: #36444a; }
+        .header .nav-bar a[class*="active"] > img {
+          filter: brightness(100); }
+      .header .nav-bar a:hover {
+        background-color: #6a6a6a;
+        margin: 0 0.5em;
+        transform: translateY(0.5em);
+        -webkit-transition: translateY(0.5em);
+        -moz-transition: translateY(0.5em);
+        -ms-transition: translateY(0.5em);
+        -o-transition: translateY(0.5em);
+        transition: translateY(0.5em); }
 
 .margin-big {
   margin: 4em; }
@@ -93,44 +136,6 @@ body {
 
 .text-italic {
   font-style: italic; }
-
-.nav-bar {
-  height: 100%;
-  display: flex;
-  justify-content: stretch;
-  background-color: #444444;
-  color: white; }
-  .nav-bar a {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: auto;
-    height: 100%;
-    background-color: #2b2b2b;
-    font-size: large;
-    text-align: center;
-    text-decoration: none;
-    text-shadow: 0 0 0;
-    font-weight: 400;
-    box-shadow: 0 0px 15px rgba(17, 17, 17, 0.9);
-    -webkit-transition: background-color 0.5s, color 0.25s, margin 0.25s;
-    -moz-transition: background-color 0.5s, color 0.25s, margin 0.25s;
-    -ms-transition: background-color 0.5s, color 0.25s, margin 0.25s;
-    -o-transition: background-color 0.5s, color 0.25s, margin 0.25s;
-    transition: background-color 0.5s, color 0.25s, margin 0.25s;
-    color: white; }
-    .nav-bar a[class*="brand"] > img {
-      height: 75%;
-      object-fit: contain;
-      filter: drop-shadow(0 0 0); }
-    .nav-bar a[class*="active"] {
-      background-color: #36444a; }
-      .nav-bar a[class*="active"] > img {
-        filter: brightness(100); }
-    .nav-bar a:hover {
-      background-color: #6a6a6a;
-      margin: 0.5em; }
 
 .pop-up {
   transform-origin: bottom center;
