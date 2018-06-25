@@ -1,12 +1,13 @@
 var gridDOM = document.getElementById("gridHere");
 var dbColumns = ["id", "fullname", "firstname", "lastname", "nickname", "dob", "male", "gen", "phone", "email", "facebook",
-	"address", "country", "city", "dancer", "choreographer", "portrait", "identifier", "idfile", "bio", "top-pos",
+	"address", "country", "city", "dancer", "choreographer", "portrait", "identifier", "idfile", "bio", "position",
 	"pos-en", "pos-vn"];
 var peoplePosition = [
-	["thanhle", "huongmin"],
-	["phuongly", "linhte", "hoaiham"],
-	["quynhmyt", "hoangseu", "yencho", "vutruong"],
-	["haiyen", "hoaithu", "camtu", "thanhduong"]
+	["bobia", "maitrang", "thanhle", "huongmin"],
+	["trangnu", "phuongly", "linhte", "hoaiham"],
+	["thanhduong", "khanhan", "quynhmyt", "camtu", "yencho"],
+	["hachip", "hoangseu", "hoaithu", "thanhhieu"],
+	["bangngan", "haiyen", "vutruong", "duyquang", "vananh", "nghiennhi"]
 ];
 var langStrings =
 	{
@@ -142,7 +143,7 @@ function populateDesc(id)
 	personData['dob'] = dob.getDate() + "-" + (dob.getMonth() + 1) + "-" + dob.getFullYear();
 	personData['name-all'] = personData['fullname'] + (!personData['nickname'] ? '' : (' - ' + personData['nickname']));
 	personData['name-all'] = personData['name-all'].toUpperCase();
-	personData['dance'] = getString('Dancer') + (personData['choreographer'] === "t" ? " & " + getString('Choreographer') : "");
+	personData['dance'] = getLocalString('Dancer') + (personData['choreographer'] === "t" ? " & " + getLocalString('Choreographer') : "");
 
 	$('.person-info .pi-data').each(function ()
 	{
@@ -151,7 +152,7 @@ function populateDesc(id)
 	});
 }
 
-function getString(id, vn)
+function getLocalString(id, vn)
 {
 	if (vn == null) vn = langVN;
 	return langStrings[id][vn ? 'vn' : 'en'];
@@ -167,14 +168,15 @@ function getAllData()
 	query("select people.*, positions.en, positions.vn " +
 		"from people " +
 		"inner join positions " +
-		"on people.toppos = positions.id", true, function (http)
-	{
-		if (http.readyState === 4 && http.status === 200)
+		"on people.position = positions.id", true,
+		function (http)
 		{
-			var dict = queryStringToArray('identifier', dbColumns, http.responseText);
-			dataAcquired(dict, true);
-		}
-	});
+			if (http.readyState === 4 && http.status === 200)
+			{
+				var dict = queryStringToArray('identifier', dbColumns, http.responseText);
+				dataAcquired(dict, true);
+			}
+		});
 }
 
 function query(queryStr, async, callback)

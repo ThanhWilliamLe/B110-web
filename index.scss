@@ -1,7 +1,5 @@
 @import "mainstyle";
 
-$img-url: "https://scontent.fhan6-1.fna.fbcdn.net/v/t1.0-9/22519206_1579228468809733_9143594181294346173_n.jpg?_nc_cat=0&oh=e72d874429ea3c1d730a03e52b990602&oe=5B7BB307";
-
 .content
 {
   flex-grow: 1;
@@ -13,14 +11,41 @@ $img-url: "https://scontent.fhan6-1.fna.fbcdn.net/v/t1.0-9/22519206_157922846880
 {
   flex-grow: 1;
   box-shadow: $outer-shadow-strong;
-  background-color: $primary-light;
-  display: flex;
-  justify-content: stretch;
+  overflow: hidden;
+  position: relative;
   & > .the-image
   {
-    flex-grow: 1;
-    background: url($img-url) no-repeat center;
+    background: none no-repeat center;
     background-size: cover;
-    //opacity: 0.75;
+    animation: img-anim 10s infinite alternate ease-in-out both;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    $theTransition: opacity 1s;
+    opacity: 1;
+    -webkit-transition: $theTransition;
+    -moz-transition: $theTransition;
+    -ms-transition: $theTransition;
+    -o-transition: $theTransition;
+    transition: $theTransition;
+
+    &[class*='hide']
+    {
+      opacity: 0;
+    }
+  }
+
+  @keyframes img-anim
+  {
+    from
+    {
+      transform: scale(1.01);
+    }
+    to
+    {
+      transform: scale(1.03);
+    }
   }
 }

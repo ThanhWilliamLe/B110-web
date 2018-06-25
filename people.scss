@@ -17,13 +17,15 @@ $border-dash: 2px dashed $primary;
   & > .ppl-group-row
   {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     & > .person
     {
       background: transparent none;
+      margin: 0 1em;
       & > .person-avatar
       {
-        margin: auto;
+        margin: 0;
+        padding: 0;
         cursor: pointer;
         object-fit: cover;
         border-radius: 50%;
@@ -81,7 +83,7 @@ $border-dash: 2px dashed $primary;
     background-color: $dark-overlay;
   }
 
-  $infoPadding: 10vw;
+  $infoPadding: 7em;
 
   & > .person-info
   {
