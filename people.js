@@ -39,8 +39,29 @@ function dataAcquired(dict, doCache)
 		localStorage['b110people'] = JSON.stringify(dict);
 	}
 
+	generateGridList();
 	makeGrid(gridDOM);
 	resizeGridChildren();
+}
+
+function generateGridList()
+{
+	var result = [];
+	var gens = {};
+	for (var p in data)
+	{
+		gens[data[p].gen] = true;
+	}
+	for(var gen in gens)
+	{
+		var a=[];
+		for (var person in data)
+		{
+			if(data[person].gen===gen) a.push(person);
+		}
+		result.push(a);
+	}
+	peoplePosition = result;
 }
 
 function gridResized()
@@ -144,7 +165,7 @@ function populateDesc(id)
 	personData['dob'] = dob.getDate() + "-" + (dob.getMonth() + 1) + "-" + dob.getFullYear();
 	personData['name-all'] = personData['fullname'] + (!personData['nickname'] ? '' : (' - ' + personData['nickname']));
 	personData['name-all'] = personData['name-all'].toUpperCase();
-	personData['dance'] = getLocalString('Dancer') + (personData['choreographer'] === "t" ? " & " + getLocalString('Choreographer') : "");
+	personData['dance'] = getLocalString('Dancer') + (personData['choreographer'] === "1" ? " & " + getLocalString('Choreographer') : "");
 
 	$('.person-info .pi-data').each(function ()
 	{
@@ -195,7 +216,7 @@ function allDataQueried(http)
 function query(queryStr, saveName, async, callback)
 {
 	var http = new XMLHttpRequest();
-	http.open("GET", "dbconnect.php?query=" + encodeURI(queryStr) + "&savename=" + saveName, async);
+	http.open("GET", "dbconnect_localmysql.php?query=" + encodeURI(queryStr) + "&savename=" + saveName, async);
 	http.onreadystatechange = function ()
 	{
 		callback(http);
