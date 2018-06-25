@@ -4,11 +4,12 @@ var gridDOM = document.getElementById("gridHere");
 var dbColumns = ["id", "fullname", "firstname", "lastname", "nickname", "dob", "male", "gen", "phone", "email", "facebook",
 	"address", "country", "city", "dancer", "choreographer", "portrait", "identifier", "idfile", "bio", "position",
 	"pos-en", "pos-vn"];
+var peopleLines = ['The Elders', 'The Leaders', 'The Grown-ups', 'The ???', 'The Freshers'];
 var peoplePosition = [
-	["bobia", "maitrang", "thanhle", "huongmin"],
-	["trangnu", "phuongly", "linhte", "hoaiham"],
-	["thanhduong", "khanhan", "quynhmyt", "camtu", "yencho"],
-	["hachip", "hoangseu", "hoaithu", "thanhhieu"],
+	["bobia"],
+	["thanhle", "huongmin", "maitrang", "trangnu", "phuongly", "linhte", "hoaiham"],
+	["thanhduong", "khanhan", "quynhmyt", "camtu", "yencho", "hoaithu", "thanhhieu"],
+	["hachip", "hoangseu"],
 	["bangngan", "haiyen", "vutruong", "duyquang", "vananh", "nghiennhi"]
 ];
 var langStrings =

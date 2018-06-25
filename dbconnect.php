@@ -1,6 +1,7 @@
 <?php
 include 'ChromePhp.php';
 
+/*
 $host = "stampy.db.elephantsql.com";
 $user = "virecnti";
 $pass = "ipMZgV1SwYP-S1eyDZ057WDb2xAo9dn5";
@@ -32,3 +33,4 @@ fclose($saveFile);
 
 echo $finalResult;
 
+*/

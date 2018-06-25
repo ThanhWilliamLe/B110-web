@@ -10,10 +10,11 @@ var images = [
 	"https://scontent.fhan3-2.fna.fbcdn.net/v/t1.0-9/32231241_381055772398894_7478315636100169728_n.jpg?_nc_cat=0&_nc_eui2=AeF5s_qbocMy9z2S3_li8cAua-VoqCE6IB8aIc156pDVo5QY1bcNEJcTUe98WOrypQ32eMs62wlGh8mrK8vVdzplp4sLu0LmrbatCZbg-n5dZA&oh=386f71139a4a75848ff1651f12a507aa&oe=5B9FC352"
 ];
 var imageDivs = [];
+var rotatedImgDivs = [];
 
 setupImages();
 changeImg();
-setInterval(changeImg, 5000);
+var currentImgInterval = setInterval(changeImg, 5000);
 
 function setupImages()
 {
@@ -23,17 +24,54 @@ function setupImages()
 		imgDiv.classList.add("the-image");
 		imgDiv.classList.add("hide");
 		imgDiv.style.backgroundImage = "url('" + imgurl + "')";
+		imgDiv.onclick = imgClicked;
 		theImageHolder.appendChild(imgDiv);
 		imageDivs.push(imgDiv);
 	});
+	resetRotated();
+}
+
+function resetRotated()
+{
+	rotatedImgDivs = [imageDivs.length];
+	for (var i in imageDivs)
+	{
+		rotatedImgDivs[i] = false;
+	}
+}
+
+function checkAllRotated()
+{
+	var allRotated = true;
+	rotatedImgDivs.forEach(function(rotated)
+	{
+		if(!rotated)
+		{
+			allRotated = false;
+		}
+	});
+	if(allRotated) resetRotated();
+}
+
+function imgClicked()
+{
+	changeImg();
+	clearInterval(currentImgInterval);
+	currentImgInterval = setInterval(changeImg, 5000);
 }
 
 function changeImg()
 {
-	var i = Math.floor(Math.random() * imageDivs.length);
+	checkAllRotated();
+	var i = 0;
+	while(rotatedImgDivs[i])
+	{
+		i = Math.floor(Math.random() * rotatedImgDivs.length);
+	}
+	rotatedImgDivs[i] = true;
 	for (var j in imageDivs)
 	{
 		imageDivs[j].classList.add('hide');
-		if(j==i) imageDivs[j].classList.toggle('hide');
+		if (j == i) imageDivs[j].classList.toggle('hide');
 	}
 }

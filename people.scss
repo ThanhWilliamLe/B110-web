@@ -17,7 +17,7 @@ $border-dash: 2px dashed $primary;
   & > .ppl-group-row
   {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     & > .person
     {
       background: transparent none;

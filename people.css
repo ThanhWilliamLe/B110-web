@@ -208,7 +208,7 @@ body {
 }
 .ppl-group > .ppl-group-row {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .ppl-group > .ppl-group-row > .person {
   background: transparent none;
