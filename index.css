@@ -7,10 +7,10 @@
 html, body, div {
   margin: 0;
   padding: 0;
-  background-color: #2b2b2b;
 }
 
 body {
+  background-color: #2b2b2b;
   display: flex;
   flex-direction: column;
   height: 100vh;
