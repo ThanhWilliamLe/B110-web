@@ -1,4 +1,5 @@
 <?php
+include 'ChromePhp.php';
 
 $host = "stampy.db.elephantsql.com";
 $user = "virecnti";
@@ -20,6 +21,14 @@ while ($row = pg_fetch_row($results))
     array_push($rows, $rowString);
 }
 
-echo implode("#&#", $rows);
-// Closing connection
 pg_close($con);
+
+$finalResult = implode("#&#", $rows);
+
+$saveFileName = $_GET['savename'];
+$saveFile = fopen($saveFileName, 'w');
+fwrite($saveFile, $finalResult);
+fclose($saveFile);
+
+echo $finalResult;
+

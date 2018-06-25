@@ -1,3 +1,5 @@
+var staticWeb = window.location.hostname.includes('github');
+
 var gridDOM = document.getElementById("gridHere");
 var dbColumns = ["id", "fullname", "firstname", "lastname", "nickname", "dob", "male", "gen", "phone", "email", "facebook",
 	"address", "country", "city", "dancer", "choreographer", "portrait", "identifier", "idfile", "bio", "position",
@@ -56,8 +58,6 @@ function resizeGridChildren()
 	});
 	var ratio = 0.8;
 	var cellSize = Math.min(rowHeight, cellWidth) * ratio;
-
-	//console.log($('.header').height() + "  " + rowHeight + "  " + cellWidth);
 
 	$(gridDOM).find(".ppl-group-row").height(rowHeight * ratio);
 	$(gridDOM).find(".person").height(cellSize);
@@ -165,24 +165,36 @@ function blackScreenClicked()
 
 function getAllData()
 {
-	query("select people.*, positions.en, positions.vn " +
-		"from people " +
-		"inner join positions " +
-		"on people.position = positions.id", true,
-		function (http)
+	var localDataFile = "./data/people_all.txt";
+	if (staticWeb)
+	{
+		var http = new XMLHttpRequest();
+		http.open("GET", localDataFile, true);
+		http.onreadystatechange = function ()
 		{
-			if (http.readyState === 4 && http.status === 200)
-			{
-				var dict = queryStringToArray('identifier', dbColumns, http.responseText);
-				dataAcquired(dict, true);
-			}
-		});
+			allDataQueried(http);
+		};
+		http.send();
+	}
+	else query("select people.*, positions.en, positions.vn from people inner join positions on people.position = positions.id",
+		localDataFile,
+		true,
+		allDataQueried);
 }
 
-function query(queryStr, async, callback)
+function allDataQueried(http)
+{
+	if (http.readyState === 4 && http.status === 200)
+	{
+		var dict = queryStringToArray('identifier', dbColumns, http.responseText);
+		dataAcquired(dict, true);
+	}
+}
+
+function query(queryStr, saveName, async, callback)
 {
 	var http = new XMLHttpRequest();
-	http.open("GET", "dbconnect.php?query=" + encodeURI(queryStr), async);
+	http.open("GET", "dbconnect.php?query=" + encodeURI(queryStr) + "&savename=" + saveName, async);
 	http.onreadystatechange = function ()
 	{
 		callback(http);
@@ -204,7 +216,6 @@ function queryStringToArray(identifier, headers, queryResult)
 		{
 			var value = rowSplit[i1];
 			value = value.replace(new RegExp("#nl#", 'g'), "</br>").replace(new RegExp("#rl#", 'g'), "</br>");
-			console.log(value);
 			var key = headers[i1];
 			innerDict[key] = value;
 		}

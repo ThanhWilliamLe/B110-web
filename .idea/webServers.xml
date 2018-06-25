@@ -10,6 +10,14 @@
           <option name="port" value="21" />
         </fileTransfer>
       </webServer>
+      <webServer id="03654271-5e4b-481f-9de0-8245a825c97d" name="b110-heliohost" url="http://ftp.b110.heliohost.org">
+        <fileTransfer host="ftp.b110.heliohost.org" port="21" rootFolder="/public_html">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>
