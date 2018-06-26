@@ -208,6 +208,7 @@ function allDataQueried(http)
 {
 	if (http.readyState === 4 && http.status === 200)
 	{
+		console.log(http.responseType);
 		var dict = queryStringToArray('identifier', dbColumns, http.responseText);
 		dataAcquired(dict, true);
 	}
@@ -216,7 +217,7 @@ function allDataQueried(http)
 function query(queryStr, saveName, async, callback)
 {
 	var http = new XMLHttpRequest();
-	http.open("GET", "dbconnect_localmysql.php?query=" + encodeURI(queryStr) + "&savename=" + saveName, async);
+	http.open("GET", "dbconnect_mysql.php?query=" + encodeURI(queryStr) + "&savename=" + saveName, async);
 	http.onreadystatechange = function ()
 	{
 		callback(http);

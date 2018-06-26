@@ -1,11 +1,14 @@
 <?php
-$host = "localhost";
-$user = "id6293897_williamle";
-$pass = "zxcasdqwe123";
-$db = "id6293897_b110";
+include "ChromePHP.php";
+
+$host = "sql12.freemysqlhosting.net";
+$user = "sql12244652";
+$pass = "A5BJwArrhk";
+$db = "sql12244652";
 
 // Open a MySQL connection
 $con = new mysqli($host, $user, $pass, $db);
+mysqli_set_charset($con, 'UTF8');
 if ($con->connect_error)
 {
 	die("Connection failed: " . $con->connect_error);

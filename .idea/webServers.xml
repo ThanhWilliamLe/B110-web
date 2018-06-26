@@ -3,15 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="251c7bfc-8479-4740-bb44-6fa22d211c5b" name="b110danceteam-000webhost" url="http://files.000webhost.com">
-        <fileTransfer host="files.000webhost.com" port="21" rootFolder="/public_html">
-          <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" />
-          </advancedOptions>
-          <option name="port" value="21" />
-        </fileTransfer>
-      </webServer>
-      <webServer id="03654271-5e4b-481f-9de0-8245a825c97d" name="b110-heliohost" url="http://ftp.b110.heliohost.org">
-        <fileTransfer host="ftp.b110.heliohost.org" port="21" rootFolder="/public_html">
+        <fileTransfer host="files.000webhost.com" port="21">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

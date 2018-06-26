@@ -1,0 +1,198 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;subset=vietnamese");
+* {
+  font-family: "Roboto";
+  color: white;
+}
+
+html, body, div {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #2b2b2b;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0 2em;
+}
+
+.header {
+  background-color: #444444;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 10vh;
+}
+.header .nav-bar {
+  flex-grow: 1;
+  display: flex;
+  justify-content: stretch;
+  background-color: #444444;
+  color: white;
+}
+.header .nav-bar a {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: auto;
+  height: inherit;
+  background-color: #2b2b2b;
+  font-size: large;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 0 0;
+  font-weight: 400;
+  box-shadow: 0 0px 15px rgba(17, 17, 17, 0.9);
+  -webkit-transition: background-color 0.5s, color 0.25s, margin 0.25s, transform 0.25s;
+  -moz-transition: background-color 0.5s, color 0.25s, margin 0.25s, transform 0.25s;
+  -ms-transition: background-color 0.5s, color 0.25s, margin 0.25s, transform 0.25s;
+  -o-transition: background-color 0.5s, color 0.25s, margin 0.25s, transform 0.25s;
+  transition: background-color 0.5s, color 0.25s, margin 0.25s, transform 0.25s;
+  color: white;
+}
+.header .nav-bar a[class*=brand] > img {
+  height: 75%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 0);
+}
+.header .nav-bar a[class*=active] {
+  background-color: #36444a;
+}
+.header .nav-bar a[class*=active] > img {
+  filter: brightness(100);
+}
+.header .nav-bar a:hover {
+  background-color: #6a6a6a;
+  margin: 0 0.5em;
+  transform: translateY(0.5em);
+  -webkit-transition: translateY(0.5em);
+  -moz-transition: translateY(0.5em);
+  -ms-transition: translateY(0.5em);
+  -o-transition: translateY(0.5em);
+  transition: translateY(0.5em);
+}
+
+.margin-big {
+  margin: 4em;
+}
+
+.margin-med {
+  margin: 2em;
+}
+
+.margin-small {
+  margin: 0.5em;
+}
+
+.vert-margin-big {
+  margin-top: 4em;
+  margin-bottom: 4em;
+}
+
+.vert-margin-med {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.vert-margin-small {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.padding-small {
+  padding: 0.5em;
+}
+
+.two-line-title {
+  width: fit-content;
+  margin: 0 auto;
+}
+.two-line-title > .title {
+  margin-bottom: 0;
+}
+.two-line-title > .subtitle {
+  margin-top: 0;
+}
+
+.title {
+  font-weight: bolder;
+}
+
+.subtitle {
+  font-weight: normal;
+}
+
+.text-no-decor {
+  text-decoration: none;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.color-primary {
+  color: #62C1EA;
+}
+
+.color-accent {
+  color: #f5942b;
+}
+
+.text-shadow {
+  text-shadow: 0 0 0;
+}
+
+.text-normal {
+  font-weight: 400;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.text-light {
+  font-weight: 100;
+}
+
+.text-italic {
+  font-style: italic;
+}
+
+.pop-up {
+  transform-origin: bottom center;
+  -webkit-transition: transform 0.25s, background-color 0.25s;
+  -moz-transition: transform 0.25s, background-color 0.25s;
+  -ms-transition: transform 0.25s, background-color 0.25s;
+  -o-transition: transform 0.25s, background-color 0.25s;
+  transition: transform 0.25s, background-color 0.25s;
+}
+.pop-up:hover {
+  transform: scale(1.25);
+  background-color: #444444;
+}
+
+.none {
+  display: none !important;
+}
+
+.blurred {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+/*# sourceMappingURL=videos.css.map */

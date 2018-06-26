@@ -24,8 +24,8 @@ function generateHeader(page)
 	navVideos.className = page !== 'videos' ? "" : "active";
 
 	navBar.appendChild(navIndex);
-	navBar.appendChild(navPeople);
 	navBar.appendChild(navVideos);
+	navBar.appendChild(navPeople);
 	header.appendChild(navBar);
 
 	parent.prepend(header);
