@@ -71,6 +71,7 @@ body
 
 .header
 {
+  z-index: 10;
   background-color: $bg-color-light;
   position: relative;
   display: flex;
@@ -292,4 +293,24 @@ body
   -o-filter: $blur;
   -ms-filter: $blur;
   filter: $blur;
+}
+
+.birthday-noti
+{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 500px;
+  width: 33vw;
+  padding: 1em 1em;
+  background-color: $primary;
+  display: flex;
+  flex-direction: column-reverse;
+  .the-noti
+  {
+    margin: 0.5em 0;
+    width: 100%;
+    height: 100px;
+    background-color: $accent;
+  }
 }

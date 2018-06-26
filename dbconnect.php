@@ -24,10 +24,12 @@ while ($row = pg_fetch_row($results))
 pg_close($con);
 
 $finalResult = implode("#&#", $rows);
+echo $finalResult;
 
 $saveFileName = $_GET['savename'];
-$saveFile = fopen($saveFileName, 'w');
-fwrite($saveFile, $finalResult);
-fclose($saveFile);
-
-echo $finalResult;
+if($saveFileName!="DONTSAVE")
+{
+	$saveFile = fopen($saveFileName, 'w');
+	fwrite($saveFile, $finalResult);
+	fclose($saveFile);
+}

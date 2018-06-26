@@ -1,3 +1,5 @@
+var langVN = false;
+
 function generateHeader(page)
 {
 	var parent = $(document.body);

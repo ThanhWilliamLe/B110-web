@@ -1,7 +1,7 @@
 var videoGroup = document.getElementById("videosHere");
 
-var ytTemplate = '<iframe src="#replace-src#" frameborder="0" allow="autoplay;" allowfullscreen></iframe>';
-var fbTemplate = '<iframe src="#replace-src#" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>';
+var ytTemplate = '<iframe src="#replace-src#" frameborder="0" allowfullscreen></iframe>';
+var fbTemplate = '<iframe src="#replace-src#" frameborder="0" allowFullScreen="true"></iframe>';
 var fbSrcConvert = function (src)
 {
 	return 'https://www.facebook.com/plugins/video.php?href=' + encodeURI(src);

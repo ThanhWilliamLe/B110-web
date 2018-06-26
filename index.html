@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="index.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="header.js"></script>
+	<script src="queryhelper.js"></script>
 </head>
 <body>
 <div class="content">
@@ -21,8 +22,16 @@
 		<h2 class="subtitle">@ftudancingclub</h2>
 	</div>
 </div>
+<div class="birthday-noti">
+	<div class="the-noti"></div>
+	<div class="the-noti"></div>
+</div>
 </body>
 </html>
 
-<script>generateHeader("index")</script>
+<script src="birthday.js"></script>
+<script>
+	generateHeader("index");
+	checkBirthdays();
+</script>
 <script src="index.js"></script>

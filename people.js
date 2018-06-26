@@ -17,7 +17,6 @@ var langStrings =
 		"Dancer": {"vn": "Vũ công", "en": "Dancer"},
 		"Choreographer": {"vn": "Biên đạo", "en": "Choreographer"},
 	};
-var langVN = false;
 var data = {};
 var currentPickedPerson = null;
 
@@ -212,43 +211,9 @@ function allDataQueried(http)
 	if (http.readyState === 4 && http.status === 200)
 	{
 		console.log(http.responseType);
-		var dict = queryStringToArray('identifier', dbColumns, http.responseText);
+		var dict = queryStringToDict('identifier', dbColumns, http.responseText);
 		dataAcquired(dict, true);
 	}
-}
-
-function query(queryStr, saveName, async, callback)
-{
-	var http = new XMLHttpRequest();
-	http.open("GET", "dbconnect_mysql.php?query=" + encodeURI(queryStr) + "&savename=" + saveName, async);
-	http.onreadystatechange = function ()
-	{
-		callback(http);
-	};
-	http.send();
-}
-
-function queryStringToArray(identifier, headers, queryResult)
-{
-	var dict = {};
-
-	var rows = queryResult.split("#&#");
-	for (var i in rows)
-	{
-		var row = rows[i];
-		var rowSplit = row.split("|");
-		var innerDict = {};
-		for (var i1 in rowSplit)
-		{
-			var value = rowSplit[i1];
-			value = value.replace(new RegExp("#nl#", 'g'), "</br>").replace(new RegExp("#rl#", 'g'), "</br>");
-			var key = headers[i1];
-			innerDict[key] = value;
-		}
-		dict[innerDict[identifier]] = innerDict;
-	}
-
-	return dict;
 }
 
 function dupeString(str, times)

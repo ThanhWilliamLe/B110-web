@@ -9,6 +9,23 @@
 #videosHere
 {
   width: 100%;
+  overflow: auto;
+
+  &::-webkit-scrollbar
+  {
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-track
+  {
+    background: $bg-color-light;
+  }
+
+  &::-webkit-scrollbar-thumb
+  {
+    background: $bg-color-bright;
+  }
+
   & > .avideo
   {
     width: 100%;

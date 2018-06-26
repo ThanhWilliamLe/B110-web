@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="people.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="header.js"></script>
+	<script src="queryhelper.js"></script>
 </head>
 <body>
 <div class="content">
@@ -48,5 +49,9 @@
 </body>
 </html>
 
-<script>generateHeader("people")</script>
+<script src="birthday.js"></script>
+<script>
+	generateHeader("people");
+	checkBirthdays();
+</script>
 <script src="people.js"></script>
