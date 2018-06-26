@@ -106,7 +106,6 @@ function makeGrid(div)
 		var stripe = document.createElement("div");
 		stripe.classList.add("stripe");
 		if(i%2===0) stripe.classList.add("even");
-		console.log($('#bg-stripes')[0]);
 		$(div).find("#bg-stripes")[0].appendChild(stripe);
 	}
 }
