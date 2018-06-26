@@ -15,14 +15,43 @@ $border-dash: 2px dashed $primary;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  position: relative;
+
+  & > #bg-stripes
+  {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    & > .stripe
+    {
+      flex-grow: 1;
+      width: 100%;
+      &[class*='even']
+      {
+        background-color: $bg-color-light;
+      }
+    }
+
+  }
+
   & > .ppl-group-row
   {
+    z-index: 4;
+    flex-grow: 1;
     display: flex;
     justify-content: center;
+
     & > .person
     {
       background: transparent none;
-      margin: 0 1em;
+      margin: auto 1em;
       & > .person-avatar
       {
         margin: 0;

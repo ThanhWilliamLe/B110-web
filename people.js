@@ -90,10 +90,8 @@ function resizeGridChildren()
 
 function makeGrid(div)
 {
-	while (div.firstChild)
-	{
-		div.removeChild(div.firstChild);
-	}
+	$(div).find(".ppl-group-row").remove();
+	$(div).find(".stripe").remove();
 	for (var i = 0; i < peoplePosition.length; i++)
 	{
 		var peopleRow = peoplePosition[i];
@@ -104,6 +102,12 @@ function makeGrid(div)
 			rowDiv.appendChild(makePerson(peopleRow[j]));
 		}
 		div.appendChild(rowDiv);
+
+		var stripe = document.createElement("div");
+		stripe.classList.add("stripe");
+		if(i%2===0) stripe.classList.add("even");
+		console.log($('#bg-stripes')[0]);
+		$(div).find("#bg-stripes")[0].appendChild(stripe);
 	}
 }
 

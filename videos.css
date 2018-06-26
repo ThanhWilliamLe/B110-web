@@ -195,4 +195,31 @@ body {
   filter: blur(5px);
 }
 
+.content {
+  height: 90vh;
+  display: flex;
+}
+
+#videosHere {
+  width: 100%;
+}
+#videosHere > .avideo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+#videosHere > .avideo[class*=yt] {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+#videosHere > .avideo[class*=fb] {
+  background-color: rgba(59, 89, 152, 0.1);
+}
+#videosHere > .avideo > iframe {
+  margin: 2em;
+  width: 50vw;
+  height: calc(50vw * 9 / 16);
+  border: 2px dashed #fff;
+  box-shadow: 0 0px 15px rgba(17, 17, 17, 0.9);
+}
+
 /*# sourceMappingURL=videos.css.map */
