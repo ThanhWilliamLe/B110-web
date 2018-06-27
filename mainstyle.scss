@@ -300,17 +300,109 @@ body
   position: absolute;
   bottom: 0;
   right: 0;
-  height: 500px;
-  width: 33vw;
   padding: 1em 1em;
-  background-color: $primary;
+  background-color: transparent;
   display: flex;
   flex-direction: column-reverse;
+  overflow: hidden;
   .the-noti
   {
-    margin: 0.5em 0;
     width: 100%;
-    height: 100px;
-    background-color: $accent;
+    margin: 1em 0 0 0;
+    background-color: $bg-color-light;
+    border: 3px dashed $primary;
+    $anim: anim 2s 2 alternate ease-in-out both;
+    -webkit-animation: $anim;
+    -o-animation: $anim;
+    animation: $anim;
+
+    @keyframes anim
+    {
+      0%
+      {
+        opacity: 0;
+        $transform0: translateX(100%);
+        -webkit-transform: $transform0;
+        -moz-transform: $transform0;
+        -ms-transform: $transform0;
+        -o-transform: $transform0;
+        transform: $transform0;
+      }
+      30%, 45%
+      {
+        opacity: 1;
+        $transform0: translateX(0);
+        -webkit-transform: $transform0;
+        -moz-transform: $transform0;
+        -ms-transform: $transform0;
+        -o-transform: $transform0;
+        transform: $transform0;
+      }
+      35%
+      {
+        opacity: 1;
+        $transform0: translateX(5%);
+        -webkit-transform: $transform0;
+        -moz-transform: $transform0;
+        -ms-transform: $transform0;
+        -o-transform: $transform0;
+        transform: $transform0;
+      }
+    }
+
+    & > p
+    {
+      text-align: right;
+      font-weight: 100;
+      padding: 2em 1.5em;
+      line-height: 1.5;
+      margin: 0;
+      & > v
+      {
+        font-weight: 300;
+        color: $accent;
+      }
+      & > v1
+      {
+        font-size: x-large;
+        font-weight: 900;
+        color: $accent;
+      }
+      & > v2
+      {
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: x-large;
+
+        $anim: anim2 1s infinite alternate linear both;
+        -webkit-animation: $anim;
+        -o-animation: $anim;
+        animation: $anim;
+
+        @keyframes anim2
+        {
+          0%
+          {
+            color: red;
+          }
+          20%
+          {
+            color: yellow;
+          }
+          40%
+          {
+            color: green;
+          }
+          60%
+          {
+            color: blue;
+          }
+          80%
+          {
+            color: purple;
+          }
+        }
+      }
+    }
   }
 }

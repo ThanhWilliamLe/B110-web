@@ -1,9 +1,9 @@
 var notifiedBirthday = false;
 var bdNotiStrings = {
-	'coming-vn': "Sắp đến sinh nhật của #people# trong #days# ngày tới! LÀM CHO #address# NGẠC NHIÊN ĐÊ!",
-	'coming-en': "#people# coming up within #days#! SUPRISE #address#!",
-	'today-vn': "CHÚC MỪNG SINH NHẬT #people#!",
-	'today-en': "HAPPY BIRTHDAY #people#!"
+	'coming-vn': "Sắp đến sinh nhật của <v>#people#</v> trong <v>#days# ngày</v> tới.</br><v1>LÀM CHO #address# NGẠC NHIÊN ĐÊ!</v1>",
+	'coming-en': "<v>#people#</v>'s #bdareis# coming up within <v>#days#</v>.</br><v1>SUPRISE #address#!</v1>",
+	'today-vn': "<v2>Chúc mừng sinh nhật! #people#.</v2>",
+	'today-en': "<v2>Happy birthday! #people#.</v2>"
 }
 
 function checkBirthdays()
@@ -47,7 +47,7 @@ function birthdaysGot(http, callback)
 
 function calculateAndNotifyBirthdays(result)
 {
-	var maxComingUpDays = 50;
+	var maxComingUpDays = 40;
 	var birthdaysComingUp = [];
 	var birthdaysToday = [];
 	Object.keys(result).forEach(function (identifier)
@@ -74,6 +74,9 @@ function calculateAndNotifyBirthdays(result)
 
 function notifyBirthdays(data, todays, comingups, maxComingUpDays)
 {
+	var div0 = document.createElement("div");
+	div0.className = "birthday-noti";
+
 	var people = "";
 	var address = "";
 
@@ -81,21 +84,56 @@ function notifyBirthdays(data, todays, comingups, maxComingUpDays)
 	{
 		var days = "" + maxComingUpDays + (langVN ? "" : " day" + (maxComingUpDays > 1 ? "s" : ""));
 
-		if (langVN) address = comingups.length > 1 ? "họ" : (data[comingups[0]]['male'] ? "anh ấy" : "cô ấy");
-		else address = comingups.length > 1 ? "them" : (data[comingups[0]]['male'] ? "him" : "her");
+		if (langVN) address = comingups.length > 1 ? "họ" : (data[comingups[0]]['male'] == '1' ? "anh ấy" : "cô ấy");
+		else address = comingups.length > 1 ? "them" : (data[comingups[0]]['male'] == '1' ? "him" : "her");
 		for (var i in comingups)
 		{
 			var person = data[comingups[i]];
-			if (i > 0 && i == comingups.length - 1) people += langVN ? "và " : "and ";
-			people += person['fullname'];
-			if (i < comingups.length - 1) people += ", ";
-		}
-		if (!langVN)
-		{
-			people += "'s birthday" + (comingups.length > 1 ? "s are" : " is");
+			if (i > 0 && i == comingups.length - 1) people += langVN ? " và " : " and ";
+			people += displayName(person);
+			if (i < comingups.length - 2) people += ", ";
 		}
 		var finalStr = bdNotiStrings[langVN ? 'coming-vn' : 'coming-en'];
 		finalStr = finalStr.replace("#people#", people).replace("#days#", days).replace("#address#", address.toUpperCase());
-		console.log(finalStr);
+		if (!langVN)
+		{
+			finalStr = finalStr.replace("#bdareis#", comingups.length > 1 ? "birthdays are" : "birthday is");
+		}
+
+		var div1 = document.createElement("div");
+		div1.className = "the-noti";
+		div1.innerHTML = "<p>" + finalStr + "</p>";
+		div0.appendChild(div1);
 	}
+	if (todays.length > 0)
+	{
+		people = "";
+		for (var i0 in todays)
+		{
+			var person0 = data[todays[i0]];
+			if (i0 > 0 && i0 == todays.length - 1) people += langVN ? " và " : " and ";
+			people += displayName(person0);
+			if (i0 < comingups.length - 2) people += ", ";
+		}
+		var finalStr0 = bdNotiStrings[langVN ? 'today-vn' : 'today-en'];
+		finalStr0 = finalStr0.replace("#people#", people);
+
+		var div2 = document.createElement("div");
+		div2.className = "the-noti";
+		div2.innerHTML = "<p>" + finalStr0 + "</p>";
+		if (comingups.length > 0) div2.style.animationDelay = "0.5s";
+		div0.appendChild(div2);
+	}
+
+	document.body.appendChild(div0);
+}
+
+function displayName(person)
+{
+	var nickname = person['nickname'];
+	if (nickname != null) return nickname;
+
+	var fullname = person['fullname'];
+	fullname = fullname.split(" ").splice(-2).join(" ");
+	return fullname;
 }
