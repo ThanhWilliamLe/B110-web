@@ -36,7 +36,8 @@ def identifiers(i):
         'Trần Thanh Dương':['thanhduong',False,5],
         'Lương Phương Ly':['phuongly',True,11],
         'Phạm Thị Khánh An':['khanhan',True,5],
-        'Nguyễn Thu Hà':['hachip',False,5]
+        'Nguyễn Thu Hà':['hachip',False,5],
+        'Nguyễn Như Quỳnh':['nhuquynh',False,5]
         }
     return {k:v[i] for k,v in pplDict.items()};
     
